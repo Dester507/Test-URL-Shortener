@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    command: uvicorn main:app --host 0.0.0.0 --reload
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=mongodb://db/test_database
+      - SECRET_KEY=hh3bg834fnwung34jf90kwdifnksdngi4t9k30gjijsiomgn4u3ng9r9iuengoiansdogi
+    depends_on:
+      - db
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
